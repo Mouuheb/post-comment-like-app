@@ -1,0 +1,22 @@
+<h1>{{ post.content }}</h1>
+<p>Posted by {{ post.user.username }}</p>
+
+<!-- Like Button -->
+<form method="POST" action="{% url 'add_like' post.id %}">
+    {% csrf_token %}
+    <button type="submit">Like</button>
+</form>
+
+{% for comment in comments %}
+    <div class="comment">
+        <p>{{ comment.content }}</p>
+        <p>Posted by {{ comment.user.username }}</p>
+    </div>
+{% endfor %}
+
+<!-- Comment Form -->
+<form method="POST" action="{% url 'add_comment' post.id %}">
+    {% csrf_token %}
+    <textarea name="comment_text"></textarea>
+    <button type="submit">Comment</button>
+</form>
